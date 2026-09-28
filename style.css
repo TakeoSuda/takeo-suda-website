@@ -4,38 +4,24 @@
    ========================================= */
 
 /* ---- 色・サイズの定義 ---- */
+/* 白・ベージュ基調の明るい配色（ダークモード設定の端末でも同じ色で表示） */
 :root {
-    --bg: #eef1f6;
-    --paper: #ffffff;
-    --ink: #1c2230;
-    --ink-sub: #5a6478;
-    --line: #dde2ec;
-    --accent: #2f6fed;
-    --accent-2: #13b5a6;
-    --header-from: #0f1b3d;
-    --header-to: #1f3f8a;
-    --chip-bg: #eef3ff;
-    --chip-ink: #1f3f8a;
-    --shadow: 0 20px 50px rgba(15, 27, 61, 0.12);
+    color-scheme: light;
+    --bg: #f3ece0;
+    --paper: #fffdf8;
+    --ink: #2e2822;
+    --ink-sub: #6b6056;
+    --line: #e6dccb;
+    --accent: #9a5b2e;
+    --accent-2: #7a6a2c;
+    --header-from: #f1e6d3;
+    --header-to: #e4d2b5;
+    --chip-bg: #f4ead9;
+    --chip-ink: #6e4a2a;
+    --shadow: 0 20px 50px rgba(110, 80, 40, 0.12);
+    --accent-shadow: rgba(154, 91, 46, 0.14);
+    --accent-glow: rgba(154, 91, 46, 0.22);
     --radius: 16px;
-}
-
-/* ダークモード */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg: #0b0f19;
-        --paper: #141a28;
-        --ink: #e6e9f0;
-        --ink-sub: #9aa4b8;
-        --line: #273047;
-        --accent: #6f9bff;
-        --accent-2: #3fd6c6;
-        --header-from: #0a1330;
-        --header-to: #1a3478;
-        --chip-bg: #1d2740;
-        --chip-ink: #b9ccff;
-        --shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
-    }
 }
 
 /* ---- 基本 ---- */
@@ -62,7 +48,7 @@ body {
     line-height: 1.8;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    overflow: hidden;
+    /* overflow: hidden は画面全体のスクロールを止めてしまうため使わない */
 }
 
 a {
@@ -87,8 +73,9 @@ h1 {
     position: relative;
     margin: 0 0 40px;
     padding: 56px 48px 48px;
+    border-radius: var(--radius) var(--radius) 0 0;
     background: linear-gradient(135deg, var(--header-from), var(--header-to));
-    color: #ffffff;
+    color: var(--ink);
     font-size: 1.75rem;
     line-height: 1.5;
     letter-spacing: 0.04em;
@@ -98,7 +85,7 @@ h1::before {
     content: "RESUME";
     display: block;
     margin-bottom: 12px;
-    color: var(--accent-2);
+    color: var(--accent);
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.35em;
@@ -187,13 +174,13 @@ h1 + ul li::before {
 h1 + ul li:hover {
     transform: translateX(4px);
     border-color: var(--accent);
-    box-shadow: 0 8px 24px rgba(47, 111, 237, 0.12);
+    box-shadow: 0 8px 24px var(--accent-shadow);
 }
 
 h1 + ul li:first-child::before {
     background: var(--accent-2);
     border-color: var(--accent-2);
-    box-shadow: 0 0 0 4px rgba(19, 181, 166, 0.25);
+    box-shadow: 0 0 0 4px var(--accent-glow);
 }
 
 /* ---- その他のリスト：タグ（チップ）表示 ---- */
@@ -230,6 +217,7 @@ h2 + ul li:hover {
     }
 
     h1 {
+        border-radius: 0;
         margin-bottom: 28px;
         padding: 40px 20px 32px;
         font-size: 1.35rem;
