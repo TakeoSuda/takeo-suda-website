@@ -1,0 +1,298 @@
+/* =========================================
+   須田丈夫 レジュメ用スタイル
+   外部フォント・CDNは使わず、端末標準フォントのみ使用
+   ========================================= */
+
+/* ---- 色・サイズの定義 ---- */
+:root {
+    --bg: #eef1f6;
+    --paper: #ffffff;
+    --ink: #1c2230;
+    --ink-sub: #5a6478;
+    --line: #dde2ec;
+    --accent: #2f6fed;
+    --accent-2: #13b5a6;
+    --header-from: #0f1b3d;
+    --header-to: #1f3f8a;
+    --chip-bg: #eef3ff;
+    --chip-ink: #1f3f8a;
+    --shadow: 0 20px 50px rgba(15, 27, 61, 0.12);
+    --radius: 16px;
+}
+
+/* ダークモード */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0b0f19;
+        --paper: #141a28;
+        --ink: #e6e9f0;
+        --ink-sub: #9aa4b8;
+        --line: #273047;
+        --accent: #6f9bff;
+        --accent-2: #3fd6c6;
+        --header-from: #0a1330;
+        --header-to: #1a3478;
+        --chip-bg: #1d2740;
+        --chip-ink: #b9ccff;
+        --shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+}
+
+/* ---- 基本 ---- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--bg);
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    max-width: 880px;
+    margin: 48px auto;
+    padding: 0 0 48px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI",
+        "Yu Gothic", Meiryo, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-size: 100% 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: color 0.2s, background-size 0.2s;
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--accent-2);
+    background-image: linear-gradient(var(--accent-2), var(--accent-2));
+}
+
+/* ---- ヘッダー（h1） ---- */
+h1 {
+    position: relative;
+    margin: 0 0 40px;
+    padding: 56px 48px 48px;
+    background: linear-gradient(135deg, var(--header-from), var(--header-to));
+    color: #ffffff;
+    font-size: 1.75rem;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+}
+
+h1::before {
+    content: "RESUME";
+    display: block;
+    margin-bottom: 12px;
+    color: var(--accent-2);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+}
+
+h1::after {
+    content: "";
+    position: absolute;
+    left: 48px;
+    bottom: 0;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-2), var(--accent));
+    border-radius: 4px 4px 0 0;
+}
+
+/* ---- 見出し（h2） ---- */
+h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 48px 48px 16px;
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+}
+
+h2::before {
+    content: "";
+    flex: none;
+    width: 6px;
+    height: 1.2em;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    border-radius: 3px;
+}
+
+h2::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+}
+
+/* ---- 履歴：タイムライン表示（h1 直後のリスト） ---- */
+h1 + ul {
+    position: relative;
+    margin: 0 48px;
+    padding: 0 0 0 28px;
+    list-style: none;
+}
+
+/* 縦のライン */
+h1 + ul::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 6px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    border-radius: 2px;
+}
+
+h1 + ul li {
+    position: relative;
+    margin-bottom: 16px;
+    padding: 16px 20px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+/* タイムラインの丸印 */
+h1 + ul li::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    left: -28px;
+    width: 14px;
+    height: 14px;
+    background: var(--paper);
+    border: 3px solid var(--accent);
+    border-radius: 50%;
+}
+
+h1 + ul li:hover {
+    transform: translateX(4px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 24px rgba(47, 111, 237, 0.12);
+}
+
+h1 + ul li:first-child::before {
+    background: var(--accent-2);
+    border-color: var(--accent-2);
+    box-shadow: 0 0 0 4px rgba(19, 181, 166, 0.25);
+}
+
+/* ---- その他のリスト：タグ（チップ）表示 ---- */
+h2 + ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 48px;
+    padding: 0;
+    list-style: none;
+}
+
+h2 + ul li {
+    padding: 6px 16px;
+    background: var(--chip-bg);
+    color: var(--chip-ink);
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 999px;
+    transition: background 0.2s, color 0.2s;
+}
+
+h2 + ul li:hover {
+    background: var(--accent);
+    color: #ffffff;
+}
+
+/* ---- スマホ表示（幅375px前後） ---- */
+@media (max-width: 600px) {
+    body {
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    h1 {
+        margin-bottom: 28px;
+        padding: 40px 20px 32px;
+        font-size: 1.35rem;
+    }
+
+    h1::after {
+        left: 20px;
+    }
+
+    h2 {
+        margin: 36px 16px 12px;
+    }
+
+    h1 + ul {
+        margin: 0 16px;
+        padding-left: 24px;
+    }
+
+    h1 + ul li {
+        padding: 12px 14px;
+        overflow-wrap: anywhere;
+    }
+
+    h1 + ul li::before {
+        left: -24px;
+        top: 18px;
+    }
+
+    h1 + ul li:hover {
+        transform: none;
+    }
+
+    h2 + ul {
+        margin: 0 16px;
+    }
+
+    h2 + ul li {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+}
+
+/* ---- 印刷時（PDFレジュメとして保存する場合） ---- */
+@media print {
+    html,
+    body {
+        background: #ffffff;
+    }
+
+    body {
+        margin: 0;
+        max-width: none;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    h1 {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    h1 + ul li,
+    h2 + ul li {
+        break-inside: avoid;
+    }
+}
